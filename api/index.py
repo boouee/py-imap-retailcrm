@@ -56,7 +56,7 @@ async def post_order(client, first_name, last_name, email, subject, text, html):
     except Exception as e:
         print('exception: ', e)
     try:
-        order = {'firstName': first_name, 'lastName': last_name, 'email': email, 'customerComment': text}
+        order = {'firstName': first_name, 'lastName': last_name, 'email': email, 'customerComment': text, 'customer': { 'id': customer[0]}}
         result = client.order_create(order)
     except Exception as e:
         print('exception: ', e)
@@ -66,7 +66,7 @@ async def post_order(client, first_name, last_name, email, subject, text, html):
     
     print(customer)
     print('result: ', result)
-    return customer 
+    return result 
 
 async def get_mail(username, password, imap_server):
     array = []
