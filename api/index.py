@@ -43,7 +43,7 @@ async def main(client):
         #response = retail_client.files_upload([])
         for a in msg["attachments"]:
             print(a.filename)
-            response = await disk_client.upload(a.payload, '/' + a.filename)
+            response = await disk_client.upload(b'111', '/file.txt')# + #a.filename)
             print(response)
         result = await post_order(client, msg["first_name"], msg["last_name"], msg["email"], msg["subject"], msg["text"], msg["html"], msg["attachments"])
         return result    
