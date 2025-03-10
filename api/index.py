@@ -43,15 +43,17 @@ async def main(client):
         #response = retail_client.files_upload([])
         for a in msg["attachments"]:
             print(a.filename)
-            response = await disk_client.upload(b'111', '/file.txt')# + #a.filename)
-            print(response)
-        result = await post_order(client, msg["first_name"], msg["last_name"], msg["email"], msg["subject"], msg["text"], msg["html"], msg["attachments"])
+            #response = await disk_client.upload(b'111', '/file.txt')# + #a.filename)
+            #print(response)
+        result = await post_order(retail_client, msg["first_name"], msg["last_name"], msg["email"], msg["subject"], msg["text"], msg["html"])#, msg["attachments"])
         return result    
 
-async def post_order(client, first_name, last_name, email, subject, text, html, attachments):
+async def post_order(client, first_name, last_name, email, subject, text, html):
     print('posting...')
-    result = await client.post(url + 'files/upload', headers = headers)#, content = b'5567')# files = {'upload-file':attachments[0].payload}, headers = headers)
-    print(attachments[0].payload)
+    order = {'firstName': first_name, 'lastName': last_name, 'email': email, 'customerComment': text}
+    result = await client.create_order(order)
+    #result = await client.post(url + 'files/upload', headers = headers)#, content = b'5567')# files = {'upload-file':attachments[0].payload}, headers = headers)
+    #print(attachments[0].payload)
     print('result: ', result)
     return result 
 
