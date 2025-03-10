@@ -52,7 +52,7 @@ async def post_order(client, first_name, last_name, email, subject, text, html):
     print('posting...')
     try: 
        filter = {'email': email}
-       customer = client.customers(filter).get_response()
+       customer = client.customers(filter).get_response()["customers"][0]["id"]
     except Exception as e:
         print('exception: ', e)
     try:
