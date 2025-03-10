@@ -30,17 +30,21 @@ password = "zrAUqnFWgD14Ygkq13VK"
 username = "kworktestbox@mail.ru"
 imap_server = "imap.mail.ru"
 
-async def upload_file(client):
+async def upload_file(client, file):
     print(await client.check_token())
 
     # Get disk information
     print(await client.get_disk_info())
+
 async def main(client):
-    await upload_file(disk_client)
+    #await upload_file(disk_client)
     messages = await get_mail(username, password, imap_server)
     for msg in messages : 
-        response = retail_client.files_upload([])
-        print(response)
+        #response = retail_client.files_upload([])
+        foe a in msg["attachments"]):
+            print(a.filename)
+            response = disk_client.upload(a.payload, '/' + a.filename)
+            print(response)
         result = await post_order(client, msg["first_name"], msg["last_name"], msg["email"], msg["subject"], msg["text"], msg["html"], msg["attachments"])
         return result    
 
