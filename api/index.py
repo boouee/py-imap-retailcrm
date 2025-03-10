@@ -18,7 +18,7 @@ disk_client = yadisk.AsyncClient(token="y0__xChi-z7Bxjj8DUgmuvkvxKrZeWiG8ZMqvScg
 
 app = FastAPI()
 #url = 'https://mdevelopeur.retailcrm.ru/api/v5/'
-url = 'https://laminat77.retailcrm.ru/api/v5/'
+url = 'https://laminat77.retailcrm.ru'
 apikey = 'bma1wovaLnCuJrayUpzUecTIcpdHnw7X'
 #apikey = 'nHY0H7zd7UWwcEiwN0EbwhXz2eGY9o9G'
 retail_client = retailcrm.v5(url, apikey)
