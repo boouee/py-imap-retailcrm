@@ -11,6 +11,10 @@ from email.header import decode_header
 import base64
 import re
 import retailcrm
+import yadisk
+import aiofiles
+
+disk_client = yadisk.AsyncClient(token="y0__xChi-z7Bxjj8DUgmuvkvxKrZeWiG8ZMqvScgztqL-Mze3zFDg")
 
 app = FastAPI()
 #url = 'https://mdevelopeur.retailcrm.ru/api/v5/'
@@ -26,7 +30,13 @@ password = "zrAUqnFWgD14Ygkq13VK"
 username = "kworktestbox@mail.ru"
 imap_server = "imap.mail.ru"
 
+async def upload_file(client):
+    print(await client.check_token())
+
+    # Get disk information
+    print(await client.get_disk_info())
 async def main(client):
+    await upload_file(disk_client)
     messages = await get_mail(username, password, imap_server)
     for msg in messages : 
         response = retail_client.files_upload([])
