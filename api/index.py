@@ -50,7 +50,10 @@ async def main(client):
 
 async def post_order(client, first_name, last_name, email, subject, text, html):
     print('posting...')
-    order = {'firstName': first_name, 'lastName': last_name, 'email': email, 'customerComment': text}
+    try:
+        order = {'firstName': first_name, 'lastName': last_name, 'email': email, 'customerComment': text}
+    except Exception as e:
+        print('exception: ', e)
     result = await client.create_order(order)
     #result = await client.post(url + 'files/upload', headers = headers)#, content = b'5567')# files = {'upload-file':attachments[0].payload}, headers = headers)
     #print(attachments[0].payload)
