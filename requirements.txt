@@ -3,3 +3,5 @@ uvicorn[standard]==0.30.6
 httpx
 imap_tools
 retailcrm
+yadisk
+aiofiles
