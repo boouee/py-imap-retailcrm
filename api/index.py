@@ -52,7 +52,7 @@ async def post_order(client, first_name, last_name, email, subject, text, html):
     print('posting...')
     try:
         order = {'firstName': first_name, 'lastName': last_name, 'email': email, 'customerComment': text}
-        result = await client.create_order(order)
+        result = await client.order_create(url, order)
     except Exception as e:
         print('exception: ', e)
     
