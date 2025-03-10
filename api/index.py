@@ -52,7 +52,7 @@ async def post_order(client, first_name, last_name, email, subject, text, html):
     print('posting...')
     try: 
        filter = {'email': email}
-       customer = client.customers(filter).text
+       customer = client.customers(filter)
     except Exception as e:
         print('exception: ', e)
     try:
@@ -65,7 +65,7 @@ async def post_order(client, first_name, last_name, email, subject, text, html):
     #print(attachments[0].payload)
     print(customer)
     print('result: ', result)
-    return result 
+    return customer 
 
 async def get_mail(username, password, imap_server):
     array = []
