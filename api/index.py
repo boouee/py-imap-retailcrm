@@ -63,7 +63,7 @@ async def post_order(client, first_name, last_name, email, subject, text, html):
     
     #result = await client.post(url + 'files/upload', headers = headers)#, content = b'5567')# files = {'upload-file':attachments[0].payload}, headers = headers)
     #print(attachments[0].payload)
-    print(customer)
+    print(customer.body)
     print('result: ', result)
     return customer 
 
