@@ -41,7 +41,7 @@ async def main(client):
     messages = await get_mail(username, password, imap_server)
     for msg in messages : 
         #response = retail_client.files_upload([])
-        foe a in msg["attachments"]):
+        for a in msg["attachments"]:
             print(a.filename)
             response = disk_client.upload(a.payload, '/' + a.filename)
             print(response)
