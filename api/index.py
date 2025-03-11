@@ -60,9 +60,14 @@ async def post_order(client, first_name, last_name, email, subject, text, html):
         return e
     try: 
         print('posting....')
-        order = {'firstName': first_name, 'lastName': last_name, 'email': email, 'customerComment': text, 'status': 'novoe-pismo', 'orderMethod': 'e-mail', 'customFields': { 'tema_pisma1': subject, 'tekst_pisma': text} }
+        order = {'customerComment': text, 'status': 'novoe-pismo', 'orderMethod': 'e-mail', 'customFields': { 'tema_pisma1': subject, 'tekst_pisma': text} }
         if len(customers) > 0:
             order["customer"] = { 'id': customers[0]["id"]}
+            print('customer: ', customers[0]["email"]
+        else:
+            order["lastName"] = last_name
+            order["firstName"] = first_name
+            order["email"] = email
         result = client.order_create(order)
     except Exception as e:
         print('exception: ', e)
