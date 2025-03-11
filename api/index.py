@@ -26,8 +26,10 @@ headers = {
   'X-API-KEY' : apikey
 }
 
-password = "zrAUqnFWgD14Ygkq13VK"
-username = "kworktestbox@mail.ru"
+#password = "zrAUqnFWgD14Ygkq13VK"
+#username = "kworktestbox@mail.ru"
+password = "r4ZuvyWydYMktHuTn3uJ"
+username = "novers495@mail.ru"
 imap_server = "imap.mail.ru"
 
 async def upload_file(client, file):
