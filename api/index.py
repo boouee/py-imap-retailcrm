@@ -50,7 +50,7 @@ async def main(client):
         for a in msg["attachments"]: 
             files = {'file': a.payload}
             try:
-                file = await client.post(url + '/api/v5/files/upload', files=files, headers=headers)
+                file = await client.post(url + '/api/v5/files/upload', payload=a.payload, headers=headers)
             except Exception as e:
                 print('exception: ', e)
             print(file.text)
