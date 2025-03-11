@@ -59,7 +59,7 @@ async def post_order(client, first_name, last_name, email, subject, text, html):
         print('exception: ', e)
         return e
     try: 
-        print('posting....')
+        print('posting.... ', customers)
         order = {'customerComment': text, 'status': 'novoe-pismo', 'orderMethod': 'e-mail', 'customFields': { 'tema_pisma1': subject, 'tekst_pisma': text} }
         if len(customers) > 0:
             order["customer"] = { 'externalId': customers[0]["externalId"]}
