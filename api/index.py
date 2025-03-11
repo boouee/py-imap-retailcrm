@@ -51,8 +51,8 @@ async def main(client):
         for a in msg["attachments"]: 
             files = {'file': a.payload}
             try:
-                conn.request("POST", "/api/v5/files/upload", a.payload, headers)
-                file = conn.get_response().read().decode("utf-8")
+                file = conn.request("POST", "/api/v5/files/upload", a.payload, headers)
+                file = file.get_response().read().decode("utf-8")
                 #file = await client.post(url + '/api/v5/files/upload', payload=a.payload, headers=headers)
             except Exception as e:
                 print('exception: ', e)
