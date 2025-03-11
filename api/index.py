@@ -13,7 +13,10 @@ import re
 import retailcrm
 import yadisk
 import aiofiles
-
+import http.client 
+conn = http.client.HTTPSConnection(url)
+headers = { 'X-API-KEY': apikey, 'Content-Type': 'image/jpeg' }  
+#res = #conn.getresponse() data = res.read() print()
 disk_client = yadisk.AsyncClient(token="y0__xChi-z7Bxjj8DUgmuvkvxKrZeWiG8ZMqvScgztqL-Mze3zFDg")
 
 app = FastAPI()
@@ -50,7 +53,9 @@ async def main(client):
         for a in msg["attachments"]: 
             files = {'file': a.payload}
             try:
-                file = await client.post(url + '/api/v5/files/upload', payload=a.payload, headers=headers)
+                conn.request("POST", "/api/v5/files/upload", a.payload, headers)
+                file = conn.get_response().read().decode("utf-8")
+                #file = await client.post(url + '/api/v5/files/upload', payload=a.payload, headers=headers)
             except Exception as e:
                 print('exception: ', e)
             print(file.text)
