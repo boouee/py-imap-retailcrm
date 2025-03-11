@@ -25,9 +25,7 @@ url = 'https://laminat77.retailcrm.ru'
 apikey = 'bma1wovaLnCuJrayUpzUecTIcpdHnw7X'
 #apikey = 'nHY0H7zd7UWwcEiwN0EbwhXz2eGY9o9G'
 retail_client = retailcrm.v5(url, apikey)
-headers = {
-  'X-API-KEY' : apikey
-}
+#headers = {'X-API-KEY' : apikey}
 
 password = "zrAUqnFWgD14Ygkq13VK"
 username = "kworktestbox@mail.ru"
