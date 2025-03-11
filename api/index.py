@@ -56,7 +56,8 @@ async def post_order(client, first_name, last_name, email, subject, text, html):
     except Exception as e:
         print('exception: ', e)
         return e
-    try:
+    try: 
+        print('posting....')
         order = {'firstName': first_name, 'lastName': last_name, 'email': email, 'customerComment': text}
         if len(customers) > 0:
             order["customer"] = { 'id': customers[0]["id"]}
@@ -64,7 +65,7 @@ async def post_order(client, first_name, last_name, email, subject, text, html):
     except Exception as e:
         print('exception: ', e)
     
-    print(customer)
+    print(customers)
     print('result: ', result)
     return result 
 
