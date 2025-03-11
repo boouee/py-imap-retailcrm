@@ -49,7 +49,10 @@ async def main(client):
             #print(response)
         for a in msg["attachments"]: 
             files = {'file': a.payload}
-            file = await client.post(url + 'api/v5/files/upload', files=files)
+            try:
+                file = await client.post(url + '/api/v5/files/upload', files=files)
+            except Exception as e:
+                print('exception: ', e)
             print(file)
         result = await post_order(retail_client, msg["first_name"], msg["last_name"], msg["email"], msg["subject"], msg["text"], msg["html"], msg["attachments"])
         return result    
