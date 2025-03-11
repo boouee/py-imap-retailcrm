@@ -67,8 +67,8 @@ async def post_order(client, first_name, last_name, email, subject, text, html):
     except Exception as e:
         print('exception: ', e)
     
-    print(customers)
-    print('result: ', result)
+    print(result)
+    print('result: ', result.get_responce())
     return result 
 
 async def get_mail(username, password, imap_server):
