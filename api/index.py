@@ -47,11 +47,17 @@ async def main(client):
             print(a.filename)
             #response = await disk_client.upload(b'111', '/file.txt')# + #a.filename)
             #print(response)
-        result = await post_order(retail_client, msg["first_name"], msg["last_name"], msg["email"], msg["subject"], msg["text"], msg["html"])#, msg["attachments"])
+        for a in msg["attachments"]: 
+            files = {'file': a.payload}
+            file = await client.post(url, files=files)
+            print(file)
+        result = await post_order(retail_client, msg["first_name"], msg["last_name"], msg["email"], msg["subject"], msg["text"], msg["html"], msg["attachments"])
         return result    
 
-async def post_order(client, first_name, last_name, email, subject, text, html):
+async def post_order(client, first_name, last_name, email, subject, text, html, attachments):
     print('posting...')
+    #for a in attachments:
+        
     try: 
        filter = {'email': email}
        customers = client.customers(filter).get_response()["customers"]#[0]["id"]           
@@ -62,7 +68,7 @@ async def post_order(client, first_name, last_name, email, subject, text, html):
         print('posting.... ', customers)
         order = {'customerComment': text, 'status': 'novoe-pismo', 'orderMethod': 'e-mail', 'customFields': { 'tema_pisma1': subject, 'tekst_pisma': text} }
         if len(customers) > 0:
-            order["customer"] = { 'externalId': customers[0]["externalId"]}
+            order["customer"] = { 'id': customers[0]["id"]}
             print('customer: ', customers[0]["email"])
         else:
             order["lastName"] = last_name
