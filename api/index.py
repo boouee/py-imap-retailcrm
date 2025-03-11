@@ -14,8 +14,7 @@ import retailcrm
 import yadisk
 import aiofiles
 import http.client 
-conn = http.client.HTTPSConnection(url)
-headers = { 'X-API-KEY': apikey, 'Content-Type': 'image/jpeg' }  
+
 #res = #conn.getresponse() data = res.read() print()
 disk_client = yadisk.AsyncClient(token="y0__xChi-z7Bxjj8DUgmuvkvxKrZeWiG8ZMqvScgztqL-Mze3zFDg")
 
@@ -26,7 +25,8 @@ apikey = 'bma1wovaLnCuJrayUpzUecTIcpdHnw7X'
 #apikey = 'nHY0H7zd7UWwcEiwN0EbwhXz2eGY9o9G'
 retail_client = retailcrm.v5(url, apikey)
 #headers = {'X-API-KEY' : apikey}
-
+conn = http.client.HTTPSConnection(url)
+headers = { 'X-API-KEY': apikey, 'Content-Type': 'image/jpeg' }  
 password = "zrAUqnFWgD14Ygkq13VK"
 username = "kworktestbox@mail.ru"
 #password = "r4ZuvyWydYMktHuTn3uJ"
