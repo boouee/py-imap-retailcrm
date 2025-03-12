@@ -34,25 +34,18 @@ username = "kworktestbox@mail.ru"
 imap_server = "imap.mail.ru"
 
 async def upload_file(client, file):
-    print(await client.check_token())
-
-    # Get disk information
-    print(await client.get_disk_info())
+    
 
 async def main(client):
-    #await upload_file(disk_client)
+
     messages = await get_mail(username, password, imap_server)
     for msg in messages : 
-        #response = retail_client.files_upload([])
         for a in msg["attachments"]:
             print(a.filename)
-            #response = await disk_client.upload(b'111', '/file.txt')# + #a.filename)
-            #print(response)
         for a in msg["attachments"]: 
             files = {'file': a.payload}
             try:
-                file = await client.post(url + "/api/v5/files/upload", data = a.payload, headers = headers)#.get_response()
-                
+                file = await client.post(url + "/api/v5/files/upload", data = a.payload, headers = headers)         
                 #conn.request("POST", "/api/v5/files/upload", a.payload, headers)
                 #file = conn.getresponse().read().decode("utf-8")
                 #file = await client.post(url + '/api/v5/files/upload', payload=a.payload, headers=headers)
@@ -70,24 +63,18 @@ async def main(client):
 
 async def post_order(client, first_name, last_name, email, subject, text, html, attachments):
     print('posting...')
-    #for a in attachments:
-        
     try: 
        filter = {'email': email}
-       customers = client.customers(filter).get_response()["customers"]#[0]["id"]           
+       customers = client.customers(filter).get_response()["customers"]        
     except Exception as e:
         print('exception: ', e)
         return e
     try: 
         print('posting.... ', customers)
-        order = {'customerComment': text, 'status': 'novoe-pismo', 'orderMethod': 'e-mail', 'customFields': { 'tema_pisma1': subject, 'tekst_pisma': text} }
+        order = {'customerComment': text, 'status': 'novoe-pismo', 'orderMethod': 'e-mail', 'customFields': { 'tema_pisma1': subject, 'tekst_pisma': text} 'lastName': last_name, 'firstName': first_name, 'email': email}
         if len(customers) > 0:
             order["customer"] = { 'id': customers[0]["id"]}
             print('customer: ', customers[0]["email"])
-        else:
-            order["lastName"] = last_name
-            order["firstName"] = first_name
-            order["email"] = email
         result = client.order_create(order)
     except Exception as e:
         print('exception: ', e)
