@@ -38,7 +38,7 @@ async def upload_file(client, file, order):
     try:
         response = await client.post(url + "/api/v5/files/upload", data = file.payload, headers = headers)
         id = response.json()["file"]["id"]
-        filename = ''.join(re.findall("\w+| |\.", filename))
+        filename = ''.join(re.findall("\w+| |\.", file.filename))
         data = { 'id': id, 'filename': file.filename, 'attachment': [{'order':{'id': order}}]}
         response = retail_client.files_edit(data)
         print(response.get_response())
