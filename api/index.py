@@ -60,8 +60,11 @@ async def main(client):
                 print('exception: ', e)
             print(file)
             try:
-                data = { 'attachment': ['order':{'id':18958}], 'filename': a.filename}
+                data = { 'filename': a.filename, 'attachment': [{'order':{'id':18958}}]}
                 response = retail_client.files_edit(data)
+                print(response)
+            except Exception as e:
+                print('exception: ', e)
         result = await post_order(retail_client, msg["first_name"], msg["last_name"], msg["email"], msg["subject"], msg["text"], msg["html"], msg["attachments"])
         return result    
 
