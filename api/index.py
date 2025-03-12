@@ -54,7 +54,7 @@ async def main(client):
                 #file = conn.getresponse().read().decode("utf-8")
                 #file = await client.post(url + '/api/v5/files/upload', payload=a.payload, headers=headers)
             #except Exception as e:
-                print('exception: ', e)
+                #print('exception: ', e)
             print(file.content, file.json()["file"]["id"])
         response = await post_order(retail_client, msg["first_name"], msg["last_name"], msg["email"], msg["subject"], msg["text"], msg["html"], msg["attachments"])
         order = response.get_response()["id"]
