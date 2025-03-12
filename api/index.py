@@ -58,9 +58,9 @@ async def main(client):
                 #file = await client.post(url + '/api/v5/files/upload', payload=a.payload, headers=headers)
             except Exception as e:
                 print('exception: ', e)
-            print(file.content)
+            print(file.content, file.json()["file"]["id"])
             try:
-                data = { 'filename': a.filename, 'attachment': [{'order':{'id':18958}}]}
+                data = { 'id': file.json()["file"]["id"], 'filename': a.filename, 'attachment': [{'order':{'id':18958}}]}
                 response = retail_client.files_edit(data)
                 print(response)
             except Exception as e:
