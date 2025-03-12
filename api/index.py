@@ -60,7 +60,7 @@ async def main(client):
                 print('exception: ', e)
             print(file.content, file.json()["file"]["id"])
             try:
-                data = { 'id': file.json()["file"]["id"], 'filename': a.filename, 'attachment': [{'order':{'id':18958}}]}
+                data = { 'id': file.json()["file"]["id"], 'filename': a.filename, 'attachment': [{'order':{'id':19036}}]}
                 response = retail_client.files_edit(data)
                 print(response)
             except Exception as e:
