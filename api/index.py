@@ -39,7 +39,7 @@ async def upload_file(client, file, order):
         data = { 'id': id, 'filename': file.filename, 'attachment': [{'order':{'id': order}}]}
         response = retail_client.files_edit(data)
         print(response.get_response())
-     except Exception as e:
+    except Exception as e:
                 print('exception: ', e)
 
 async def main(client):
