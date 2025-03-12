@@ -16,7 +16,6 @@ import aiofiles
 import http.client 
 
 #res = #conn.getresponse() data = res.read() print()
-disk_client = yadisk.AsyncClient(token="y0__xChi-z7Bxjj8DUgmuvkvxKrZeWiG8ZMqvScgztqL-Mze3zFDg")
 
 app = FastAPI()
 #url = 'https://mdevelopeur.retailcrm.ru/api/v5/'
@@ -33,33 +32,35 @@ username = "kworktestbox@mail.ru"
 #username = "novers495@mail.ru"
 imap_server = "imap.mail.ru"
 
-async def upload_file(client, file):
-    
+async def upload_file(client, file, order):
+    try:
+        response = await client.post(url + "/api/v5/files/upload", data = file.payload, headers = headers)
+        id = response.json()["file"]["id"]
+        data = { 'id': id, 'filename': file.filename, 'attachment': [{'order':{'id': order}}]}
+        response = retail_client.files_edit(data)
+        print(response.get_response())
+     except Exception as e:
+                print('exception: ', e)
 
 async def main(client):
-
     messages = await get_mail(username, password, imap_server)
     for msg in messages : 
         for a in msg["attachments"]:
             print(a.filename)
         for a in msg["attachments"]: 
             files = {'file': a.payload}
-            try:
-                file = await client.post(url + "/api/v5/files/upload", data = a.payload, headers = headers)         
+            try:                       
                 #conn.request("POST", "/api/v5/files/upload", a.payload, headers)
                 #file = conn.getresponse().read().decode("utf-8")
                 #file = await client.post(url + '/api/v5/files/upload', payload=a.payload, headers=headers)
             except Exception as e:
                 print('exception: ', e)
             print(file.content, file.json()["file"]["id"])
-            try:
-                data = { 'id': file.json()["file"]["id"], 'filename': a.filename, 'attachment': [{'order':{'id':19036}}]}
-                response = retail_client.files_edit(data)
-                print(response)
-            except Exception as e:
-                print('exception: ', e)
-        result = await post_order(retail_client, msg["first_name"], msg["last_name"], msg["email"], msg["subject"], msg["text"], msg["html"], msg["attachments"])
-        return result    
+        response = await post_order(retail_client, msg["first_name"], msg["last_name"], msg["email"], msg["subject"], msg["text"], msg["html"], msg["attachments"])
+        order = response.get_response()["id"]
+        for a in msg["attachments"]: 
+            await upload_file(client, a, order)
+        return response    
 
 async def post_order(client, first_name, last_name, email, subject, text, html, attachments):
     print('posting...')
@@ -78,8 +79,6 @@ async def post_order(client, first_name, last_name, email, subject, text, html, 
         result = client.order_create(order)
     except Exception as e:
         print('exception: ', e)
-    
-    print(result)
     print('result: ', result.get_response())
     return result 
 
