@@ -35,6 +35,7 @@ username = "novers495@mail.ru"
 imap_server = "imap.mail.ru"
 
 async def upload_file(client, file, order):
+    print(file.filename, file.content_disposition)
     try:
         response = await client.post(url + "/api/v5/files/upload", data = file.payload, headers = headers)
         id = response.json()["file"]["id"]
