@@ -51,7 +51,7 @@ async def main(client):
         for a in msg["attachments"]: 
             files = {'file': a.payload}
             try:
-                file = await client.post(url + "/api/v5/files/upload", data = a.payload, headers = headers)
+                file = await client.post(url + "/api/v5/files/upload", data = a.payload, headers = headers).get_response()
                 
                 #conn.request("POST", "/api/v5/files/upload", a.payload, headers)
                 #file = conn.getresponse().read().decode("utf-8")
