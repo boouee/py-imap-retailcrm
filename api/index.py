@@ -88,8 +88,8 @@ async def get_mail(username, password, imap_server):
     with MailBox(imap_server).login(username, password, initial_folder='INBOX') as mailbox:
         print('fetching...')
         exists = mailbox.folder.exists('INBOX|CRM')
-            if NOT(exists):
-                mailbox.folder.create('INBOX|CRM')
+        if NOT(exists):
+            mailbox.folder.create('INBOX|CRM')
        
         for msg in mailbox.fetch(AND(seen=True)):
             mailbox.move(msg.uid,'INBOX|CRM') 
