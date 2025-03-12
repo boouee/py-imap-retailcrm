@@ -63,7 +63,8 @@ async def main(client):
         response = await post_order(retail_client, msg["first_name"], msg["last_name"], msg["email"], msg["subject"], msg["text"], msg["html"], msg["attachments"])
         order = response.get_response()["id"]
         for a in msg["attachments"]: 
-            await upload_file(client, a, order)
+            if a.content_disposition == 'attachment':
+                await upload_file(client, a, order)
         return response    
 
 async def post_order(client, first_name, last_name, email, subject, text, html, attachments):
