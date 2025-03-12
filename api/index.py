@@ -20,7 +20,9 @@ import http.client
 app = FastAPI()
 #url = 'https://mdevelopeur.retailcrm.ru/api/v5/'
 url = 'https://laminat77.retailcrm.ru'
-apikey = 'bma1wovaLnCuJrayUpzUecTIcpdHnw7X'
+site = 'novers'
+apikey = 'vikuHSdIKilFPMr0oyj5LpemwHvEPjVw'
+#apikey = 'bma1wovaLnCuJrayUpzUecTIcpdHnw7X'
 #apikey = 'nHY0H7zd7UWwcEiwN0EbwhXz2eGY9o9G'
 retail_client = retailcrm.v5(url, apikey)
 #headers = {'X-API-KEY' : apikey}
@@ -76,7 +78,7 @@ async def post_order(client, first_name, last_name, email, subject, text, html, 
         if len(customers) > 0:
             order["customer"] = { 'id': customers[0]["id"]}
             print('customer: ', customers[0]["email"])
-        result = client.order_create(order)
+        result = client.order_create(order, site)
     except Exception as e:
         print('exception: ', e)
     print('result: ', result.get_response())
