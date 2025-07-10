@@ -47,7 +47,10 @@ async def upload_file(client, file, order):
                 print('exception: ', e)
 
 async def main(client):
-    messages = await get_mail(username, password, imap_server)
+    try:
+        messages = await get_mail(username, password, imap_server)
+    except Exception as e:
+        print("Exception: ", e)
     for msg in messages : 
         for a in msg["attachments"]:
             print(a.filename)
