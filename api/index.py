@@ -32,7 +32,7 @@ headers = { 'X-API-KEY': apikey, 'Content-Type': 'image/jpeg' }
 #username = "kworktestbox@mail.ru"
 password = "1Mcl552smPjUsPXu"
 username = "crm@apexdiabetes.ru"
-imap_server = "imap.mail.netangels.ru"
+imap_server = "mail.netangels.ru"
 
 async def upload_file(client, file, order):
     print(file.filename, file.content_disposition)
